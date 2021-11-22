@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processamento de salários</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h1>Cadastre seus funcionários</h1>
+            <form action="salvar.php" method="get" onsubmit="return atividade()">
+                <label for="quantfunc" >Coloque quantos funcionarios você quer cadastrar </label>
+                <input type="number" id="quantfunc" min="1">
+                <input type="submit" id="but" value="Clique aqui">
+            </form>
+            <p>Alistagem vai aparecer aqui:</p> 
+            <p id="resfi">*</p>
+        </section>
+    </main>
+    <script>
+        let resfi = document.getElementById("resfi")
+        function atividade() {
+            let qf = Number(document.getElementById("quantfunc").value)
+            let num = 1
+            let soma = 0
+            let med = 0
+            let min = 0
+            let max = 0 
+            let sal = 0
+            while (num <= qf) {
+                sal = Number(prompt("Coloque o salario do funcionario"))
+                soma += sal
+                med = soma / qf
+
+                if (num == 1) {
+                    max = sal
+                    min = sal
+                }
+                else {
+                    if (sal > max) {
+                        max = sal
+                    }
+                    else if (sal < min) {
+                        min = sal 
+                    }
+                }
+                num++
+            }
+            resfi.innerHTML = `A quantidade de salarios cadastrados foi: ${qf} . A empresa precisara de ${soma} reais para o pagamento desses funcionarios. O maior salario foi de ${max} reais e o menor de ${min} reais. E a media de salarios foi de ${med}.`
+            return false
+        }
+    </script>
+</body>
+</html>
